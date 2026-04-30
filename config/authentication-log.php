@@ -5,20 +5,23 @@ return [
     // The database table name
     'table_name' => 'authentication_log',
 
+       // ADD THIS
+    'model' => \App\Models\AuthenticationLog::class,
+
     // Database connection (null = default)
     'db_connection' => null,
 
     // Events to listen
     'events' => [
         'login' => \Illuminate\Auth\Events\Login::class,
-        'failed' => \Illuminate\Auth\Events\Failed::class,
+        // 'failed' => \Illuminate\Auth\Events\Failed::class,
         'logout' => \Illuminate\Auth\Events\Logout::class,
         'other-device-logout' => \Illuminate\Auth\Events\OtherDeviceLogout::class,
     ],
 
     'listeners' => [
         'login' => \Rappasoft\LaravelAuthenticationLog\Listeners\LoginListener::class,
-        'failed' => \Rappasoft\LaravelAuthenticationLog\Listeners\FailedLoginListener::class,
+        // 'failed' => \Rappasoft\LaravelAuthenticationLog\Listeners\FailedLoginListener::class,
         'logout' => \Rappasoft\LaravelAuthenticationLog\Listeners\LogoutListener::class,
         'other-device-logout' => \Rappasoft\LaravelAuthenticationLog\Listeners\OtherDeviceLogoutListener::class,
     ],

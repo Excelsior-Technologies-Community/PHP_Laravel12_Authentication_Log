@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
-use Rappasoft\LaravelAuthenticationLog\Models\AuthenticationLog;
+use App\Models\AuthenticationLog; 
 
 class User extends Authenticatable
 {
@@ -32,7 +32,17 @@ class User extends Authenticatable
         ];
     }
 
-    // Authentication Logs Relation
+    /**
+     * Force correct morph type
+     */
+    public function getMorphClass()
+    {
+        return 'App\\Models\\User';
+    }
+
+    /**
+     * Authentication Logs Relation
+     */
     public function authentications()
     {
         return $this->hasMany(
