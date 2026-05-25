@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AuthLogController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,10 +11,13 @@ Route::get('/', function () {
 // Authenticated routes
 Route::middleware(['auth'])->group(function () {
 
-    // Authentication Log page
-    Route::get('/auth-log', function () {
-        return view('auth-log');
-    })->name('auth-log');
+    // Authentication Log routes
+    Route::get('/auth-log', [AuthLogController::class, 'index'])->name('auth-log');
+    Route::get('/auth-log/export', [AuthLogController::class, 'export'])->name('auth-log.export');
+    Route::get('/auth-log/export-pdf', [AuthLogController::class, 'exportPdf'])->name('auth-log.export-pdf');
+    Route::get('/auth-log/statistics', [AuthLogController::class, 'statistics'])->name('auth-log.statistics');
+    Route::get('/auth-log/{id}/delete', [AuthLogController::class, 'destroy'])->name('auth-log.delete');
+    Route::get('/auth-log/clear-all', [AuthLogController::class, 'clearAll'])->name('auth-log.clear');
 
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
